@@ -6,7 +6,7 @@ const app = express.Router();
 const productModel = require("./Products.schema");
 
 app.get("/", async (req, res)=>{
-    const {sort} = req.query;
+    const {sort, priority} = req.query;
     let products = await productModel.find().sort({"timeStamp": sort});
     res.send(products);
 })
