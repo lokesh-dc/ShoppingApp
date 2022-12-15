@@ -6,7 +6,8 @@ const app = express.Router();
 const productModel = require("./Products.schema");
 
 app.get("/", async (req, res)=>{
-    let products = await productModel.find();
+    const {sort} = req.query;
+    let products = await productModel.find().sort({"timeStamp": sort});
     res.send(products);
 })
 
@@ -14,7 +15,7 @@ app.get("/", async (req, res)=>{
 app.post("/", async (req, res)=>{
     let {title, quantity, priority} = req.body;
     try{
-        let date = new Date().toLocaleDateString()
+        let date = Date.now();
         await productModel.create({title, quantity, priority, timeStamp: date});
         res.send({status: true, message: "Product created successfully" });
     }catch(e){

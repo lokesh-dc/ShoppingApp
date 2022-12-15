@@ -14,6 +14,10 @@ app.get("/", async (req, res)=>{
 app.post("/", async (req, res)=>{
     const {productId} = req.body;
     try{
+        let isBookmarked = await bookmarkModel.findOne({productId});
+        if(isBookmarked){
+            return res.send({status: false, message: "Product already added"});
+        }
         let date = new Date().toLocaleDateString()
         await bookmarkModel.create({productId});
         res.send({status: true, message: "Product bookmarked successfully" });
