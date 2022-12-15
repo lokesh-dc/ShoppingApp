@@ -15,7 +15,7 @@ app.get("/", async (req, res) =>{
     res.send("Shopping List App");
 })
 
-app.listen((8080), async ()=>{
+app.listen((8000), async ()=>{
     await dbConnect();
-    console.log("Server started on http://localhost:8080");
+    console.log("Server started on http://localhost:8000");
 })
